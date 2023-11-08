@@ -5,23 +5,19 @@
         <tr>
             <th>Id</th>
             <th>Nombre</th>
-            <th>Correo</th>
-            <th>Acciones</th>
+            <th>Precio</th>
+            <th>Imagen</th>
         </tr>
     </thead>
     <tbody>
+    {{ range.}}
         <tr>
-            <td scope="row">1</td>
-            <td>Megofsss</td>
-            <td>Megof@</td>
-            <td>1</td>
+            <td scope="row">{{.Id}}</td>
+            <td>{{.Name}}</td>
+            <td>{{.Price}}</td>
+            <td><img src="{{.Img}}" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
         </tr>
-        <tr>
-            <td scope="row">2</td>
-            <td>Timer</td>
-            <td>Timer@</td>
-            <td>2</td>
-        </tr>
+    {{end}}
     </tbody>
 </table>
 <a name="" id="" class="btn btn-primary" href="/create" role="button">Crear</a>

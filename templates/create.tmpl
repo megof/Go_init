@@ -3,20 +3,26 @@
 
 <div class="card">
     <div class="card-header">
-        Empleados
+        Insertar productos
     </div>
     <div class="card-body">
         <div class="container">
-            <form method="post" action="/insert">
+            <form method="POST" action="/insertpt">
                 <div class="form-group">
                     <label for="">Nombre</label>
-                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                    <small id="helpId" class="form-text text-muted">Help text</small>
+                    <input type="text" class="form-control" name="Namept" id="Namept" aria-describedby="helpId" placeholder="">
+                    <small id="helpId" class="form-text text-muted">Inserta el nombre del producto</small>
                 </div>
                 <div class="form-group">
-                    <label for="">Correo:</label>
-                    <input type="email" class="form-control" name="" id="" aria-describedby="emailHelpId" placeholder="">
-                    <small id="emailHelpId" class="form-text text-muted">inserta tu correo</small>
+                    <label for="">Precio</label>
+                    <input type="text"
+                        class="form-control form-control-sm" name="Pricept" id="Pricept" aria-describedby="helpId" placeholder="">
+                    <small id="helpId" class="form-text text-muted">Inserta el precio del producto</small>
+                </div>
+                <div class="form-group">
+                    <label for="">Url Imagen</label>
+                    <input type="text" class="form-control" name="Imgpt" id="Imgpt" aria-describedby="helpId" placeholder="">
+                    <small id="helpId" class="form-text text-muted">Inserta el enlace a la imagen del producto</small>
                 </div>
                 <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
