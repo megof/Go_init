@@ -20,9 +20,61 @@ type Products struct {
 	Img   string
 }
 
+type User struct {
+	Id    int
+	Name  string
+	Email string
+	Pass  string
+}
+
+func Log(w http.ResponseWriter, r *http.Request) {
+	//fmt.Fprintf(w, "Hola desde index")
+	templates.ExecuteTemplate(w, "lgn.tm", nil)
+}
+
+func Login(w http.ResponseWriter, r *http.Request) {
+	connon := connect()
+
+	if r.Method == "POST" {
+		name := r.FormValue("Nameus")
+		pass := r.FormValue("Passus")
+
+		sele, err := connon.Query("SELECT * FROM empleados")
+
+		if err != nil {
+			panic(err.Error())
+		}
+
+		user := User{}
+		if err != nil {
+			panic(err.Error())
+		}
+		for sele.Next() {
+			var id int
+			var nombre, correo, Contrasena string
+			err = sele.Scan(&id, &nombre, &correo, &Contrasena)
+			if err != nil {
+				panic(err.Error())
+			}
+			user.Name = nombre
+			user.Pass = Contrasena
+			if user.Pass == pass && user.Name == name {
+				http.Redirect(w, r, "/index", 301)
+				Selectpt(w, r)
+			} else {
+				http.Redirect(w, r, "/", 301)
+			}
+		}
+		//user.Id = id
+		//user.Email = correo
+
+	}
+
+}
+
 func Index(w http.ResponseWriter, r *http.Request) {
 	//fmt.Fprintf(w, "Hola desde index")
-	templates.ExecuteTemplate(w, "index.tm", nil)
+	templates.ExecuteTemplate(w, "idx.tm", nil)
 
 	//prueba bd
 	/*
@@ -97,14 +149,15 @@ func Selectpt(w http.ResponseWriter, r *http.Request) {
 
 		products = append(products, product)
 	}
-
-	templates.ExecuteTemplate(w, "index.tm", products)
+	templates.ExecuteTemplate(w, "idx.tm", products)
 }
 
 func main() {
-	http.HandleFunc("/", Selectpt)
+	http.HandleFunc("/", Log)
+	http.HandleFunc("/index", Selectpt)
 	http.HandleFunc("/create", Create)
 	http.HandleFunc("/insertpt", Insertpt)
+	http.HandleFunc("/login", Login)
 
 	log.Println("servidor corriendo.")
 	http.ListenAndServe(":8080", nil)
